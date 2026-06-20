@@ -1111,7 +1111,7 @@
             <div class="contact-info-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
             <div>
               <h4>Email</h4>
-              <p><a href="https://mail.google.com/mail/u/0/?to=shukdevdatta@gmail.com&fs=1&tf=cm">shukdevdatta@gmail.com</a></p>
+              <p><a href="mailto:shukdevdatta@gmail.com">shukdevdatta@gmail.com</a></p>
             </div>
           </div>
           <div class="contact-info-item">
@@ -1456,30 +1456,7 @@ if (contactForm) {
         subject: `✦ [GitKit Contact] ${subject}`,
         from_name: name,
         replyto: email,
-        message: [
-          '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-          '  ✦  NEW MESSAGE — GitKit Contact Form',
-          '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-          '',
-          '👤  NAME',
-          '    ' + name,
-          '',
-          '📧  EMAIL',
-          '    ' + email,
-          '',
-          '💬  WHATSAPP',
-          '    ' + whatsapp,
-          '',
-          '📌  SUBJECT',
-          '    ' + subject,
-          '',
-          '💭  MESSAGE',
-          '    ' + message,
-          '',
-          '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-          '  Sent via GitKit · shukdevtroy.github.io',
-          '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
-        ].join('\n'),
+        html: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#f0f2ff;font-family:'Segoe UI',Arial,sans-serif;padding:40px 16px}.wrap{max-width:580px;margin:0 auto}.header{background:linear-gradient(135deg,#6C63FF 0%,#A78BFA 100%);border-radius:18px 18px 0 0;padding:36px 40px;text-align:center}.header-icon{width:56px;height:56px;background:rgba(255,255,255,0.2);border-radius:16px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:26px}.header h1{color:#fff;font-size:22px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px}.header p{color:rgba(255,255,255,0.75);font-size:14px}.body{background:#fff;padding:36px 40px}.label{font-size:11px;font-weight:700;color:#6C63FF;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}.value{font-size:15px;color:#1e1e2e;font-weight:500;margin-bottom:20px}.row{display:flex;gap:24px;margin-bottom:4px}.col{flex:1}.divider{height:1px;background:#f0f0f8;margin:8px 0 24px}.msg-box{background:#f8f7ff;border:1.5px solid #e8e6ff;border-radius:12px;padding:18px 20px;font-size:15px;color:#2d2d44;line-height:1.7;white-space:pre-wrap}.footer{background:#f8f7ff;border-radius:0 0 18px 18px;padding:20px 40px;text-align:center;border-top:1px solid #ede9ff}.footer p{font-size:12px;color:#94a3b8}</style></head><body><div class="wrap"><div class="header"><div class="header-icon">⬡</div><h1>New Contact Message</h1><p>Someone reached out via GitKit</p></div><div class="body"><div class="row"><div class="col"><div class="label">👤 Name</div><div class="value">${name}</div></div><div class="col"><div class="label">📧 Email</div><div class="value">${email}</div></div></div><div class="row"><div class="col"><div class="label">💬 WhatsApp</div><div class="value">${whatsapp}</div></div><div class="col"><div class="label">📌 Subject</div><div class="value">${subject}</div></div></div><div class="divider"></div><div class="label">💭 Message</div><div class="msg-box">${message}</div></div><div class="footer"><p>Sent via <strong>GitKit</strong> · shukdevtroy.github.io</p></div></div></body></html>`,
         botcheck: ''
       })
     })
