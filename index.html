@@ -328,6 +328,49 @@
   .doc-more a{color:var(--brand);font-weight:600;text-decoration:none}
   .doc-more a:hover{text-decoration:underline}
 
+  /* ── CONTACT DEVELOPER ── */
+  #contact-developer{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .contact-wrap{display:grid;grid-template-columns:1fr 1.3fr;gap:40px;margin-top:52px;align-items:start}
+  .contact-info{background:linear-gradient(160deg,#5A52E8 0%,var(--brand) 55%,#8B5CF6 100%);border-radius:var(--r-lg);padding:36px 32px;color:#fff;position:relative;overflow:hidden}
+  .contact-info::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.08)}
+  .contact-info h3{font-size:21px;font-weight:800;letter-spacing:-.4px;margin-bottom:10px;position:relative}
+  .contact-info p{font-size:14.5px;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:28px;position:relative}
+  .contact-info-list{display:flex;flex-direction:column;gap:18px;position:relative}
+  .contact-info-item{display:flex;gap:12px;align-items:flex-start}
+  .contact-info-icon{width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .contact-info-icon svg{width:18px;height:18px;color:#fff}
+  .contact-info-item h4{font-size:13px;font-weight:700;margin-bottom:2px}
+  .contact-info-item p{font-size:13px;color:rgba(255,255,255,.75);margin:0;line-height:1.5}
+  .contact-info-item a{color:#fff;text-decoration:none;font-weight:600}
+  .contact-info-item a:hover{text-decoration:underline}
+
+  .contact-form-card{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);padding:32px;box-shadow:var(--sh)}
+  .cf-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .cf-field{margin-bottom:18px}
+  .cf-field.full{grid-column:1/-1}
+  .cf-field label{display:block;font-size:13px;font-weight:700;color:var(--text);margin-bottom:7px;letter-spacing:-.1px}
+  .cf-field label .opt{color:var(--text-3);font-weight:500}
+  .cf-field input,.cf-field textarea{width:100%;font-family:'Inter',sans-serif;font-size:14px;color:var(--text);background:var(--surface);border:1.5px solid var(--border);border-radius:11px;padding:12px 14px;transition:border-color .2s,box-shadow .2s,background .2s}
+  .cf-field input:focus,.cf-field textarea:focus{outline:none;border-color:var(--brand);background:#fff;box-shadow:0 0 0 4px var(--brand-pale)}
+  .cf-field textarea{resize:vertical;min-height:120px;line-height:1.55}
+  .cf-field input::placeholder,.cf-field textarea::placeholder{color:var(--text-3)}
+  .cf-submit{width:100%;display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--brand);color:#fff;border:none;padding:14px 20px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;transition:all .22s;font-family:'Inter',sans-serif;box-shadow:var(--sh-brand)}
+  .cf-submit:hover{background:var(--brand-h);transform:translateY(-1px);box-shadow:0 12px 36px rgba(108,99,255,.36)}
+  .cf-submit:disabled{opacity:.7;cursor:default;transform:none}
+  .cf-submit svg{width:17px;height:17px}
+  .cf-note{display:flex;gap:8px;align-items:flex-start;margin-top:14px;font-size:12.5px;color:var(--text-3);line-height:1.55}
+  .cf-note svg{width:14px;height:14px;flex-shrink:0;margin-top:2px;color:var(--text-3)}
+  .cf-status{display:none;align-items:center;gap:8px;margin-top:16px;padding:11px 14px;border-radius:10px;font-size:13.5px;font-weight:600}
+  .cf-status.show{display:flex}
+  .cf-status.ok{background:#DCFCE7;color:#16A34A}
+  .cf-status.err{background:#FEE2E2;color:#DC2626}
+  .cf-status svg{width:15px;height:15px;flex-shrink:0}
+
+  @media(max-width:900px){
+    .contact-wrap{grid-template-columns:1fr}
+    .cf-row{grid-template-columns:1fr}
+  }
+
   /* ── LEGAL (Privacy / Terms) ── */
   .legal-wrap{max-width:760px;margin:48px auto 0}
   .legal-note{display:flex;gap:10px;align-items:flex-start;background:var(--brand-pale);border:1px solid rgba(108,99,255,.18);border-radius:var(--r);padding:16px 20px;font-size:13.5px;color:var(--text-2);line-height:1.6;margin-bottom:44px}
@@ -419,6 +462,7 @@
     <a href="#security">Security</a>
     <a href="#testimonials">Testimonials</a>
     <a href="#faq">FAQ</a>
+    <a href="#contact-developer">Contact</a>
     <a href="#cta">Get GitKit</a>
   </div>
   <div class="nav-right">
@@ -1049,6 +1093,85 @@
   </div>
 </section>
 
+<!-- ═══ CONTACT DEVELOPER ═══ -->
+<section id="contact-developer">
+  <div class="container">
+    <div class="reveal">
+      <div class="stag">Contact</div>
+      <h2>Talk to the developer<br />directly.</h2>
+      <p class="section-lead">Found a bug, have a feature request, or just want to say hi? Send a message and it'll land straight in the developer's inbox.</p>
+    </div>
+
+    <div class="contact-wrap">
+      <div class="contact-info reveal">
+        <h3>Let's talk</h3>
+        <p>GitKit is built and maintained by a single developer. Every message is read personally — usually answered within a day or two.</p>
+        <div class="contact-info-list">
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+            <div>
+              <h4>Email</h4>
+              <p><a href="mailto:shukdevdatta@gmail.com">shukdevdatta@gmail.com</a></p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.498 14.382c-.301-.151-1.767-.867-2.045-.966-.273-.101-.473-.151-.673.15-.197.295-.771 1.005-.945 1.205-.176.2-.347.225-.642.075-1.756-.866-2.909-1.55-4.062-3.516-.305-.527.305-.49.872-1.625.097-.197.05-.371-.05-.522-.099-.151-.673-1.625-.922-2.187-.247-.55-.5-.475-.673-.475-.198-.025-.396-.025-.595-.025-.198 0-.52.075-.792.372C6.149 7.94 5.5 8.95 5.5 10.6c0 1.65 1.2 3.25 1.4 3.475.198.225 2.747 4.197 6.673 5.72 3.262 1.27 3.917.95 4.62.875.7-.075 2.272-.925 2.595-1.825.32-.9.32-1.65.222-1.825-.1-.175-.346-.275-.512-.4z"/><path d="M12.001 2.001c-5.524 0-10 4.476-10 10 0 1.93.55 3.72 1.5 5.25L2 22l4.8-1.475c1.47.85 3.18 1.35 5.2 1.35 5.524 0 10-4.476 10-10s-4.476-10-9.999-10zm0 18.25c-1.776 0-3.42-.5-4.82-1.375l-.346-.2-3.05.95.975-2.975-.225-.35a8.226 8.226 0 01-1.284-4.3c0-4.553 3.703-8.25 8.25-8.25 4.547 0 8.25 3.697 8.25 8.25 0 4.553-3.703 8.25-8.25 8.25z"/></svg></div>
+            <div>
+              <h4>WhatsApp</h4>
+              <p>Leave your number and we'll reach out</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+            <div>
+              <h4>Response time</h4>
+              <p>Usually within 24–48 hours</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-card reveal">
+        <form id="contactForm">
+          <div class="cf-row">
+            <div class="cf-field">
+              <label for="cf-name">Your Name</label>
+              <input type="text" id="cf-name" name="name" placeholder="Jane Doe" required />
+            </div>
+            <div class="cf-field">
+              <label for="cf-email">Your Email</label>
+              <input type="email" id="cf-email" name="email" placeholder="jane@example.com" required />
+            </div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-field">
+              <label for="cf-whatsapp">Your WhatsApp Contact Number</label>
+              <input type="tel" id="cf-whatsapp" name="whatsapp" placeholder="+1 555 123 4567" required />
+            </div>
+            <div class="cf-field">
+              <label for="cf-subject">Subject</label>
+              <input type="text" id="cf-subject" name="subject" placeholder="Bug report, feature idea…" required />
+            </div>
+          </div>
+          <div class="cf-field full">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" name="message" placeholder="Tell us what's on your mind…" required></textarea>
+          </div>
+          <button type="submit" class="cf-submit" id="cf-submit-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+            Send Message
+          </button>
+          <div class="cf-note">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>This sends directly to shukdevdatta@gmail.com — no email app needed.</span>
+          </div>
+          <div class="cf-status" id="cf-status"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ PRIVACY POLICY ═══ -->
 <section id="privacy">
   <div class="container">
@@ -1168,6 +1291,7 @@
     <div class="footer-links">
       <a href="#features">Features</a>
       <a href="#docs">Documentation</a>
+      <a href="#contact-developer">Contact</a>
       <a href="#privacy">Privacy Policy</a>
       <a href="#terms">Terms</a>
     </div>
@@ -1288,6 +1412,74 @@ document.querySelectorAll('.btn-hero, .btn, .cta-btn').forEach(btn => {
 const rs = document.createElement('style');
 rs.textContent = '@keyframes ripple{to{transform:scale(2.5);opacity:0}}';
 document.head.appendChild(rs);
+
+// ── CONTACT DEVELOPER FORM ──
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  const statusEl = document.getElementById('cf-status');
+  const submitBtn = document.getElementById('cf-submit-btn');
+  const submitBtnDefaultHTML = submitBtn.innerHTML;
+  // Web3Forms — no activation email needed, works instantly.
+  // Get your free access key at https://web3forms.com (enter shukdevdatta@gmail.com)
+  const WEB3FORMS_ACCESS_KEY = '6b1878be-271b-4e0f-a2a2-1a85af6b1518';
+
+  function setStatus(type, html) {
+    statusEl.className = 'cf-status show ' + type;
+    statusEl.innerHTML = html;
+  }
+
+  contactForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('cf-name').value.trim();
+    const email = document.getElementById('cf-email').value.trim();
+    const whatsapp = document.getElementById('cf-whatsapp').value.trim();
+    const subject = document.getElementById('cf-subject').value.trim();
+    const message = document.getElementById('cf-message').value.trim();
+
+    if (!name || !email || !whatsapp || !subject || !message) {
+      setStatus('err', '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Please fill in every field before sending.');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Sending…';
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: `[GitKit Contact] ${subject}`,
+        from_name: name,
+        name: name,
+        email: email,
+        whatsapp: whatsapp,
+        message: `WhatsApp: ${whatsapp}\n\n${message}`,
+        botcheck: ''
+      })
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setStatus('ok', '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Message sent! We\'ll get back to you soon.');
+          contactForm.reset();
+        } else {
+          throw new Error(data.message || 'Submission failed');
+        }
+      })
+      .catch(() => {
+        setStatus('err', '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Couldn\'t send right now — please email shukdevdatta@gmail.com directly.');
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = submitBtnDefaultHTML;
+      });
+  });
+}
 
 // ── SMOOTH ACTIVE NAV ──
 const sections = document.querySelectorAll('section[id]');
