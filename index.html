@@ -1111,7 +1111,7 @@
             <div class="contact-info-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
             <div>
               <h4>Email</h4>
-              <p><a href="mailto:shukdevdatta@gmail.com">shukdevdatta@gmail.com</a></p>
+              <p><a href="https://mail.google.com/mail/u/0/?to=shukdevdatta@gmail.com&fs=1&tf=cm">shukdevdatta@gmail.com</a></p>
             </div>
           </div>
           <div class="contact-info-item">
@@ -1453,13 +1453,33 @@ if (contactForm) {
       },
       body: JSON.stringify({
         access_key: WEB3FORMS_ACCESS_KEY,
-        subject: `[GitKit Contact] ${subject}`,
+        subject: `✦ [GitKit Contact] ${subject}`,
         from_name: name,
-        name: name,
-        email: email,
-        whatsapp: whatsapp,
-        message: message,
-        _template: 'box',
+        replyto: email,
+        message: [
+          '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+          '  ✦  NEW MESSAGE — GitKit Contact Form',
+          '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+          '',
+          '👤  NAME',
+          '    ' + name,
+          '',
+          '📧  EMAIL',
+          '    ' + email,
+          '',
+          '💬  WHATSAPP',
+          '    ' + whatsapp,
+          '',
+          '📌  SUBJECT',
+          '    ' + subject,
+          '',
+          '💭  MESSAGE',
+          '    ' + message,
+          '',
+          '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+          '  Sent via GitKit · shukdevtroy.github.io',
+          '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+        ].join('\n'),
         botcheck: ''
       })
     })
