@@ -28,24 +28,101 @@
   html{scroll-behavior:smooth}
   body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
-  /* ── NAV ── */
-  nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:66px;background:rgba(255,255,255,.85);backdrop-filter:blur(24px);border-bottom:1px solid rgba(226,232,240,.7);transition:box-shadow .3s,background .3s}
-  nav.scrolled{box-shadow:var(--sh);background:rgba(255,255,255,.95)}
-  .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-  .logo-img{width:34px;height:34px;border-radius:9px;overflow:hidden;box-shadow:0 2px 8px rgba(108,99,255,.3);transition:transform .2s,box-shadow .2s}
-  .logo-img:hover{transform:scale(1.07);box-shadow:0 4px 16px rgba(108,99,255,.4)}
-  .logo-img img{width:100%;height:100%;object-fit:cover}
-  .logo-text{font-weight:800;font-size:18px;color:var(--text);letter-spacing:-.4px}
-  .nav-links{display:flex;align-items:center;gap:6px}
-  .nav-links a{text-decoration:none;font-size:14px;font-weight:500;color:var(--text-2);padding:7px 13px;border-radius:9px;transition:color .2s,background .2s}
-  .nav-links a:hover{color:var(--text);background:var(--surface-2)}
-  .nav-right{display:flex;align-items:center;gap:10px}
+  /* ── BUTTONS ── */
   .btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all .2s;white-space:nowrap;font-family:'Inter',sans-serif}
   .btn-ghost{background:transparent;color:var(--text-2);border:1.5px solid var(--border)}
   .btn-ghost:hover{background:var(--surface);color:var(--text);border-color:var(--border-hover)}
   .btn-primary{background:var(--brand);color:#fff;box-shadow:var(--sh-brand)}
   .btn-primary:hover{background:var(--brand-h);transform:translateY(-1px);box-shadow:0 12px 40px rgba(108,99,255,.38)}
   .btn-primary:active{transform:translateY(0)}
+
+  /* ── NAV: floating pill ── */
+  #navbar{position:fixed;top:14px;left:0;right:0;z-index:200;padding:0 24px;pointer-events:none}
+  .nav-shell{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px}
+  .nav-shell>*{pointer-events:auto}
+  .logo{display:flex;align-items:center;gap:10px;text-decoration:none;justify-self:start;background:rgba(255,255,255,.78);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);border:1px solid rgba(226,232,240,.9);border-radius:999px;padding:5px 16px 5px 5px;box-shadow:var(--sh-sm);transition:box-shadow .3s,background .3s}
+  .logo-img{width:34px;height:34px;border-radius:50%;overflow:hidden;box-shadow:0 2px 8px rgba(108,99,255,.3);transition:transform .2s,box-shadow .2s}
+  .logo:hover .logo-img{transform:scale(1.07);box-shadow:0 4px 16px rgba(108,99,255,.4)}
+  .logo-img img{width:100%;height:100%;object-fit:cover}
+  .logo-text{font-weight:800;font-size:18px;color:var(--text);letter-spacing:-.4px}
+
+  .nav-pill{justify-self:center;background:rgba(255,255,255,.78);backdrop-filter:blur(24px) saturate(1.4);-webkit-backdrop-filter:blur(24px) saturate(1.4);border:1px solid rgba(226,232,240,.9);border-radius:999px;padding:5px;box-shadow:var(--sh-sm);transition:box-shadow .3s,background .3s}
+  .pill-links{position:relative;display:flex;align-items:center;gap:2px}
+  .nav-ind{position:absolute;top:0;left:0;height:100%;width:0;border-radius:999px;background:var(--brand-pale);box-shadow:inset 0 0 0 1px rgba(108,99,255,.14);opacity:0;transition:left .32s cubic-bezier(.4,0,.2,1),width .32s cubic-bezier(.4,0,.2,1),opacity .2s;pointer-events:none;z-index:0}
+  .pill-links a{position:relative;z-index:1;display:inline-flex;align-items:center;gap:7px;text-decoration:none;font-size:13.5px;font-weight:500;color:var(--text-2);padding:8px 13px;border-radius:999px;white-space:nowrap;transition:color .2s}
+  .pill-links a:hover{color:var(--text)}
+  .pill-links a.active{color:var(--brand)}
+  .nav-new{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:#fff;background:linear-gradient(135deg,var(--brand),#A78BFA);padding:2px 8px 2px 7px;border-radius:100px;line-height:1.5;box-shadow:0 2px 8px rgba(108,99,255,.3)}
+  .nav-new i{width:5px;height:5px;border-radius:50%;background:#fff;animation:pulse 2s infinite}
+
+  .nav-actions{display:flex;align-items:center;gap:8px;justify-self:end}
+  .nav-search{display:inline-flex;align-items:center;gap:9px;height:42px;padding:0 10px 0 14px;border-radius:999px;background:rgba(255,255,255,.78);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);border:1px solid rgba(226,232,240,.9);color:var(--text-3);font-size:13px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;box-shadow:var(--sh-sm);transition:all .2s}
+  .nav-search:hover{border-color:rgba(108,99,255,.4);color:var(--text-2);box-shadow:var(--sh)}
+  .nav-search svg{width:15px;height:15px;flex-shrink:0}
+  .nav-search .s-label{display:none}
+  .kbd{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--text-3);background:var(--surface-2);border:1px solid var(--border);border-bottom-width:2px;border-radius:6px;padding:1px 6px;line-height:1.5}
+  .nav-dl{height:42px;border-radius:999px;padding:0 20px}
+  .nav-burger{display:none;align-items:center;justify-content:center;width:42px;height:42px;border-radius:999px;background:rgba(255,255,255,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(226,232,240,.9);color:var(--text);cursor:pointer;box-shadow:var(--sh-sm);transition:all .2s}
+  .nav-burger:hover{border-color:rgba(108,99,255,.4);color:var(--brand)}
+  .nav-burger svg{width:19px;height:19px}
+
+  #navbar.scrolled .logo,#navbar.scrolled .nav-pill,#navbar.scrolled .nav-search,#navbar.scrolled .nav-burger{box-shadow:var(--sh);background:rgba(255,255,255,.94)}
+  .nav-pill a:focus-visible,.nav-search:focus-visible,.nav-burger:focus-visible,.logo:focus-visible,.nav-dl:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+
+  @media(min-width:1360px){.nav-search .s-label{display:inline}}
+  @media(max-width:1120px){
+    #navbar{padding:0 16px}
+    .nav-pill{display:none}
+    .nav-burger{display:inline-flex}
+    .nav-search{width:42px;padding:0;justify-content:center}
+    .nav-search .kbd{display:none}
+  }
+  @media(max-width:560px){
+    .nav-dl{width:42px;padding:0;justify-content:center}
+    .nav-dl span{display:none}
+    .logo{padding-right:14px}
+  }
+
+  /* ── DRAWER ── */
+  #drawer-overlay{position:fixed;inset:0;background:rgba(15,23,42,.45);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .3s;z-index:290}
+  #drawer-overlay.open{opacity:1;pointer-events:auto}
+  #drawer{position:fixed;top:0;right:0;bottom:0;width:min(360px,88vw);background:#fff;z-index:300;transform:translateX(100%);visibility:hidden;transition:transform .38s cubic-bezier(.32,.72,0,1),visibility 0s linear .38s;display:flex;flex-direction:column;box-shadow:var(--sh-lg)}
+  #drawer.open{transform:none;visibility:visible;transition:transform .38s cubic-bezier(.32,.72,0,1),visibility 0s}
+  .dr-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--border)}
+  .dr-head .logo{background:none;border:none;box-shadow:none;padding:0;backdrop-filter:none;-webkit-backdrop-filter:none}
+  .dr-close{width:38px;height:38px;border-radius:11px;border:1px solid var(--border);background:#fff;color:var(--text-2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+  .dr-close:hover{background:var(--surface);color:var(--text)}
+  .dr-close svg{width:18px;height:18px}
+  .dr-body{flex:1;overflow:auto;padding:14px 14px 8px}
+  .dr-search{width:100%;display:flex;align-items:center;gap:10px;padding:12px 14px;margin-bottom:10px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface);color:var(--text-3);font-size:14px;font-weight:500;font-family:'Inter',sans-serif;cursor:pointer;text-align:left}
+  .dr-search svg{width:16px;height:16px}
+  .dr-label{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text-3);padding:14px 14px 6px}
+  .dr-body a{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;font-size:16px;font-weight:600;color:var(--text-2);text-decoration:none;transition:background .2s,color .2s}
+  .dr-body a:hover{background:var(--surface);color:var(--text)}
+  .dr-body a.cur{background:var(--brand-pale);color:var(--brand)}
+  .dr-foot{padding:14px 18px 20px;border-top:1px solid var(--border)}
+  .dr-foot .btn{width:100%;justify-content:center;height:48px;border-radius:13px;font-size:15px}
+
+  /* ── COMMAND PALETTE ── */
+  #cmdk{position:fixed;inset:0;z-index:400;display:flex;justify-content:center;align-items:flex-start;padding:12vh 16px 0;background:rgba(15,23,42,.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .2s}
+  #cmdk.open{opacity:1;pointer-events:auto}
+  .cmdk-panel{width:100%;max-width:580px;background:#fff;border:1px solid var(--border);border-radius:20px;box-shadow:var(--sh-lg);overflow:hidden;transform:translateY(-10px) scale(.98);transition:transform .22s ease}
+  #cmdk.open .cmdk-panel{transform:none}
+  .cmdk-head{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--border)}
+  .cmdk-head>svg{width:18px;height:18px;color:var(--text-3);flex-shrink:0}
+  .cmdk-head input{flex:1;min-width:0;border:none;outline:none;font:500 16px 'Inter',sans-serif;color:var(--text);background:transparent}
+  .cmdk-head input::placeholder{color:var(--text-3)}
+  .cmdk-list{max-height:min(380px,50vh);overflow:auto;padding:8px}
+  .cmdk-group{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--text-3);padding:10px 12px 6px}
+  .cmdk-item{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:11px;cursor:pointer;font-size:14px;font-weight:500;color:var(--text-2)}
+  .cmdk-item .ci{width:30px;height:30px;border-radius:9px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text-3);transition:all .15s}
+  .cmdk-item.sel{background:var(--brand-pale);color:var(--text)}
+  .cmdk-item.sel .ci{background:var(--brand);color:#fff}
+  .cmdk-item .hint{margin-left:auto;font-size:12px;color:var(--text-3);font-weight:500}
+  .cmdk-empty{padding:32px 16px;text-align:center;font-size:14px;color:var(--text-3)}
+  .cmdk-foot{display:flex;align-items:center;gap:16px;padding:10px 18px;border-top:1px solid var(--border);background:var(--surface);font-size:12px;color:var(--text-3)}
+  .cmdk-foot span{display:inline-flex;align-items:center;gap:6px}
+  @media(max-width:560px){.cmdk-foot{display:none}}
 
   /* ── HERO ── */
   #hero{position:relative;overflow:hidden;padding:156px 40px 100px;text-align:center;background:linear-gradient(180deg,#FAFBFF 0%,#FFFFFF 100%)}
@@ -54,7 +131,6 @@
   .hero-orb-2{top:200px;left:-120px;width:420px;height:420px;background:radial-gradient(ellipse,rgba(139,133,255,.09) 0%,transparent 70%)}
   .hero-orb-3{top:80px;right:-100px;width:380px;height:380px;background:radial-gradient(ellipse,rgba(34,197,94,.07) 0%,transparent 70%)}
 
-  /* animated grid */
   .hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:.35;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 40%,transparent 100%)}
 
   .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--brand-pale);border:1px solid rgba(108,99,255,.22);color:var(--brand);font-size:13px;font-weight:600;padding:7px 16px;border-radius:100px;margin-bottom:28px;animation:fadeInDown .55s ease both}
@@ -271,18 +347,10 @@
   .sec-card h3{font-size:16px;font-weight:700;margin-bottom:10px;color:var(--text);position:relative}
   .sec-card p{font-size:14px;color:var(--text-2);line-height:1.68;position:relative}
 
-  /* ── TESTIMONIALS ── */
+  /* ── FEEDBACK ── */
   #testimonials{background:#fff}
-  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:52px}
-  .testi-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px;display:flex;flex-direction:column;gap:16px;transition:all .25s;cursor:default}
-  .testi-card:hover{background:#fff;box-shadow:var(--sh-lg);transform:translateY(-4px);border-color:rgba(108,99,255,.15)}
-  .testi-stars{display:flex;gap:3px}
-  .testi-stars svg{width:15px;height:15px;fill:#F59E0B}
-  .testi-q{font-size:15px;color:var(--text);line-height:1.7;flex:1}
-  .testi-author{display:flex;align-items:center;gap:11px;padding-top:14px;border-top:1px solid var(--border)}
-  .testi-av{width:40px;height:40px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff}
-  .testi-name{font-size:14px;font-weight:700;color:var(--text)}
-  .testi-role{font-size:12px;color:var(--text-3);margin-top:1px}
+  .fb-card{max-width:640px;margin:44px auto 0;text-align:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:40px 32px}
+  .fb-card p{font-size:16px;color:var(--text-2);line-height:1.7;margin-bottom:22px}
 
   /* ── FAQ ── */
   #faq{background:var(--surface)}
@@ -312,7 +380,6 @@
   .cta-chip{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);color:rgba(255,255,255,.8);font-size:13px;font-weight:500;padding:8px 16px;border-radius:100px;border:1px solid rgba(255,255,255,.18)}
   .cta-chip svg{width:14px;height:14px}
 
-  /* ── FOOTER ── */
   /* ── DOCUMENTATION ── */
   #docs{background:#fff}
   .doc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:52px}
@@ -390,6 +457,7 @@
     .doc-grid{grid-template-columns:1fr}
   }
 
+  /* ── FOOTER ── */
   footer{background:var(--text);color:rgba(255,255,255,.45);padding:48px 40px;font-size:14px}
   .footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
   .footer-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
@@ -410,7 +478,6 @@
 
   /* ── RESPONSIVE ── */
   @media(max-width:900px){
-    nav{padding:0 20px}.nav-links{display:none}
     #hero{padding:136px 20px 72px}
     section{padding:72px 20px}
     #stats{padding:48px 20px}.stats-grid{grid-template-columns:repeat(2,1fr)}
@@ -420,7 +487,6 @@
     .showcase-wrap{grid-template-columns:1fr}
     .cmp-grid{grid-template-columns:1fr}
     .sec-grid{grid-template-columns:1fr}
-    .testi-grid{grid-template-columns:1fr}
     .wf-pane.active{flex-direction:column}
     .wf-tabs{flex-wrap:wrap}
     .fc{display:none}
@@ -495,36 +561,102 @@
 
 <div id="cursor-glow"></div>
 
-<!-- ═══ NAV ═══ -->
-<nav id="navbar">
-  <a href="#" class="logo">
-    <div class="logo-img">
-      <img src="icon.ico" alt="GitKit" />
+<!-- ═══ NAV (floating pill) ═══ -->
+<header id="navbar">
+  <div class="nav-shell">
+    <a href="#" class="logo" aria-label="GitKit home">
+      <div class="logo-img"><img src="icon.ico" alt="" /></div>
+      <span class="logo-text">GitKit</span>
+    </a>
+
+    <nav class="nav-pill" aria-label="Main">
+      <div class="pill-links" id="pillLinks">
+        <span class="nav-ind" id="navInd"></span>
+        <a href="#features">Features</a>
+        <a href="#preview">What's New <span class="nav-new"><i></i>New</span></a>
+        <a href="#workflow">Workflow</a>
+        <a href="#security">Security</a>
+        <a href="#docs">Docs</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact-developer">Contact</a>
+      </div>
+    </nav>
+
+    <div class="nav-actions">
+      <button type="button" class="nav-search" id="openCmdk" aria-label="Search the site (Ctrl K)">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <span class="s-label">Search…</span>
+        <span class="kbd">Ctrl K</span>
+      </button>
+      <a href="https://drive.google.com/file/d/1Abem_ZiYylN5OPbEQCgYX2eU0kG3WwNg/view?usp=sharing" class="btn btn-primary nav-dl" aria-label="Download GitKit">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        <span>Download</span>
+      </a>
+      <button type="button" class="nav-burger" id="openDrawer" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
     </div>
-    <span class="logo-text">GitKit</span>
-  </a>
-  <div class="nav-links">
-    <a href="#features">Features</a>
-    <a href="#showcase">Editor</a>
-    <a href="#preview">What's New</a>
-    <a href="#workflow">Workflow</a>
-    <a href="#compare">Compare</a>
-    <a href="#security">Security</a>
-    <a href="#testimonials">Testimonials</a>
-    <a href="#faq">FAQ</a>
-    <a href="#docs">Documentation</a>
-    <a href="#contact-developer">Contact</a>
-    <a href="#privacy">Privacy Policy</a>
-    <a href="#terms">Terms of Service</a>
-    <a href="#cta">Get GitKit</a>
   </div>
-  <div class="nav-right">
+</header>
+
+<!-- ═══ DRAWER (tablet / mobile) ═══ -->
+<div id="drawer-overlay"></div>
+<aside id="drawer" aria-label="Menu" aria-hidden="true">
+  <div class="dr-head">
+    <a href="#" class="logo" data-close>
+      <div class="logo-img"><img src="icon.ico" alt="" /></div>
+      <span class="logo-text">GitKit</span>
+    </a>
+    <button type="button" class="dr-close" id="closeDrawer" aria-label="Close menu">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="dr-body">
+    <button type="button" class="dr-search" id="drSearch">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      Search GitKit…
+    </button>
+    <div class="dr-label">Product</div>
+    <a href="#features" data-close>Features</a>
+    <a href="#showcase" data-close>Editor</a>
+    <a href="#preview" data-close>What's New <span class="nav-new"><i></i>New</span></a>
+    <a href="#workflow" data-close>Workflow</a>
+    <div class="dr-label">Why GitKit</div>
+    <a href="#compare" data-close>Compare</a>
+    <a href="#security" data-close>Security</a>
+    <a href="#testimonials" data-close>Feedback</a>
+    <div class="dr-label">Help</div>
+    <a href="#docs" data-close>Documentation</a>
+    <a href="#faq" data-close>FAQ</a>
+    <a href="#contact-developer" data-close>Contact</a>
+    <div class="dr-label">Legal</div>
+    <a href="#privacy" data-close>Privacy Policy</a>
+    <a href="#terms" data-close>Terms of Service</a>
+  </div>
+  <div class="dr-foot">
     <a href="https://drive.google.com/file/d/1Abem_ZiYylN5OPbEQCgYX2eU0kG3WwNg/view?usp=sharing" class="btn btn-primary">
-      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-      Download
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+      Download GitKit — Free
     </a>
   </div>
-</nav>
+</aside>
+
+<!-- ═══ COMMAND PALETTE ═══ -->
+<div id="cmdk" aria-hidden="true">
+  <div class="cmdk-panel" role="dialog" aria-modal="true" aria-label="Search GitKit">
+    <div class="cmdk-head">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      <input type="text" id="cmdkInput" placeholder="Jump to a section, page or action…" autocomplete="off" spellcheck="false" aria-label="Search" />
+      <span class="kbd">Esc</span>
+    </div>
+    <div class="cmdk-list" id="cmdkList" role="listbox"></div>
+    <div class="cmdk-foot">
+      <span><span class="kbd">↑</span><span class="kbd">↓</span> navigate</span>
+      <span><span class="kbd">↵</span> select</span>
+      <span><span class="kbd">Esc</span> close</span>
+    </div>
+  </div>
+</div>
 
 <!-- ═══ HERO ═══ -->
 <section id="hero">
@@ -564,7 +696,6 @@
 
   <!-- Hero Window -->
   <div class="hero-scene" style="margin-top:64px;">
-    <!-- Floating cards -->
     <div class="fc fc-1">
       <div class="fc-label">Repos managed</div>
       <div class="fc-num">2,847</div>
@@ -680,82 +811,9 @@
   </div>
 </section>
 
-<!-- ═══ MARQUEE ═══ -->
+<!-- ═══ MARQUEE (items are generated by the script at the bottom) ═══ -->
 <div id="marquee-wrap">
-  <div class="marquee-track" id="marquee">
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Browse Repositories</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Edit Files In-App</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Commit &amp; Push</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Secure Token Auth</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Explore Public Repos</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Download Files</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Local Session Storage</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>No Browser Needed</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Create Files &amp; Folders</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Rename &amp; Delete Files</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>View PDFs In-App</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Jupyter Notebook Viewer</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Branch Management</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Upload Whole Folders</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Markdown Preview &amp; Edit</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Image Preview</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Find &amp; Replace</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Delete Files &amp; Folders</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Browse Repositories</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Edit Files In-App</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Commit &amp; Push</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Secure Token Auth</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Explore Public Repos</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Download Files</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Local Session Storage</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>No Browser Needed</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Create Files &amp; Folders</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Rename &amp; Delete Files</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>View PDFs In-App</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Jupyter Notebook Viewer</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Branch Management</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Upload Whole Folders</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Markdown Preview &amp; Edit</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Image Preview</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Find &amp; Replace</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Delete Files &amp; Folders</div>
-    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-  </div>
+  <div class="marquee-track" id="marquee"></div>
 </div>
 
 <!-- ═══ STATS ═══ -->
@@ -1332,29 +1390,16 @@
   </div>
 </section>
 
-<!-- ═══ TESTIMONIALS ═══ -->
+<!-- ═══ FEEDBACK (replaces the invented testimonials) ═══ -->
 <section id="testimonials">
   <div class="container">
     <div class="reveal" style="text-align:center">
-      <div class="stag" style="justify-content:center">Testimonials</div>
-      <h2>Loved by developers who ship.</h2>
+      <div class="stag" style="justify-content:center">Feedback</div>
+      <h2>Used GitKit? Tell us how it went.</h2>
     </div>
-    <div class="testi-grid">
-      <div class="testi-card reveal">
-        <div class="testi-stars"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-        <p class="testi-q">"I maintain six open-source libraries. GitKit replaced the browser for 90% of my GitHub work. The editor and push flow alone are worth it."</p>
-        <div class="testi-author"><div class="testi-av" style="background:linear-gradient(135deg,#6C63FF,#8B5CF6)">A</div><div><div class="testi-name">Arjun Mehta</div><div class="testi-role">Open-source maintainer · 14k stars</div></div></div>
-      </div>
-      <div class="testi-card reveal">
-        <div class="testi-stars"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-        <p class="testi-q">"As a freelancer working across dozens of client repos, context-switching was killing me. GitKit gave me one place to manage everything."</p>
-        <div class="testi-author"><div class="testi-av" style="background:linear-gradient(135deg,#F59E0B,#EF4444)">S</div><div><div class="testi-name">Sofia Reyes</div><div class="testi-role">Freelance developer · Full-stack</div></div></div>
-      </div>
-      <div class="testi-card reveal">
-        <div class="testi-stars"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-        <p class="testi-q">"We onboard engineers who aren't always comfortable with CLI. GitKit gives them a proper GUI without sacrificing power. The team adopted it in a week."</p>
-        <div class="testi-author"><div class="testi-av" style="background:linear-gradient(135deg,#22C55E,#0EA5E9)">L</div><div><div class="testi-name">Lena Fischer</div><div class="testi-role">Engineering lead · Startup</div></div></div>
-      </div>
+    <div class="fb-card reveal">
+      <p>Real feedback from GitKit users will live here. If GitKit has saved you time, send a short note — with your permission, it may be featured on this page.</p>
+      <a href="#contact-developer" class="btn btn-primary">Share your feedback</a>
     </div>
   </div>
 </section>
@@ -1636,6 +1681,8 @@
       <a href="#docs">Documentation</a>
       <a href="#faq">FAQ</a>
       <a href="#contact-developer">Contact</a>
+      <a href="#privacy">Privacy Policy</a>
+      <a href="#terms">Terms of Service</a>
     </div>
     <div class="footer-copy">© 2026 GitKit. All rights reserved.</div>
   </div>
@@ -1649,9 +1696,224 @@ document.addEventListener('mousemove', e => {
   glow.style.top = e.clientY + 'px';
 });
 
-// ── NAV SCROLL ──
-window.addEventListener('scroll', () => {
-  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 12);
+// ── MARQUEE (built once, duplicated for a seamless loop) ──
+(function () {
+  const items = [
+    'Browse Repositories','Edit Files In-App','Commit & Push','Secure Token Auth','Explore Public Repos',
+    'Download Files','Local Session Storage','No Browser Needed','Create Files & Folders','Rename & Delete Files',
+    'View PDFs In-App','Jupyter Notebook Viewer','Branch Management','Upload Whole Folders',
+    'Markdown Preview & Edit','Image Preview','Find & Replace','Delete Files & Folders'
+  ];
+  const check = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>';
+  const esc = s => s.replace(/&/g, '&amp;');
+  const html = items.map(t =>
+    '<div class="marquee-item">' + check + esc(t) + '</div><div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>'
+  ).join('');
+  document.getElementById('marquee').innerHTML = html + html;
+})();
+
+// ── NAV: scrolled state ──
+const navbar = document.getElementById('navbar');
+function onScrollNav() { navbar.classList.toggle('scrolled', window.scrollY > 12); }
+window.addEventListener('scroll', onScrollNav, { passive: true });
+onScrollNav();
+
+// ── NAV: sliding indicator + scroll-spy ──
+const pillLinks = document.getElementById('pillLinks');
+const navInd = document.getElementById('navInd');
+const pLinks = Array.from(pillLinks.querySelectorAll('a'));
+const drawerLinks = Array.from(document.querySelectorAll('#drawer .dr-body a'));
+let activeLink = null;
+
+function placeInd(a) {
+  if (!a) { navInd.style.opacity = 0; return; }
+  if (navInd.style.opacity !== '1') {
+    navInd.style.transition = 'none';
+    navInd.style.left = a.offsetLeft + 'px';
+    navInd.style.width = a.offsetWidth + 'px';
+    void navInd.offsetWidth;
+    navInd.style.transition = '';
+    navInd.style.opacity = 1;
+    return;
+  }
+  navInd.style.left = a.offsetLeft + 'px';
+  navInd.style.width = a.offsetWidth + 'px';
+}
+pLinks.forEach(a => {
+  a.addEventListener('mouseenter', () => placeInd(a));
+  a.addEventListener('focus', () => placeInd(a));
+});
+pillLinks.addEventListener('mouseleave', () => placeInd(activeLink));
+pillLinks.addEventListener('focusout', () => placeInd(activeLink));
+
+const SPY = {
+  'features': 'features', 'showcase': 'features', 'preview': 'preview', 'workflow': 'workflow',
+  'security': 'security', 'faq': 'faq', 'docs': 'docs', 'contact-developer': 'contact-developer'
+};
+function spy() {
+  let cur = '';
+  document.querySelectorAll('section[id]').forEach(s => {
+    if (window.scrollY >= s.offsetTop - 140) cur = s.id;
+  });
+  const target = SPY[cur] || '';
+  const a = pLinks.find(x => x.getAttribute('href') === '#' + target) || null;
+  if (a !== activeLink) {
+    pLinks.forEach(x => x.classList.toggle('active', x === a));
+    activeLink = a;
+    placeInd(a);
+  }
+  drawerLinks.forEach(x => x.classList.toggle('cur', cur !== '' && x.getAttribute('href') === '#' + cur));
+}
+window.addEventListener('scroll', spy, { passive: true });
+window.addEventListener('resize', () => placeInd(activeLink));
+window.addEventListener('load', spy);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => placeInd(activeLink));
+spy();
+
+// ── DRAWER ──
+const drawer = document.getElementById('drawer');
+const drawerOverlay = document.getElementById('drawer-overlay');
+const burger = document.getElementById('openDrawer');
+function updateLock() {
+  document.body.style.overflow = (drawer.classList.contains('open') || cmdk.classList.contains('open')) ? 'hidden' : '';
+}
+function openDrawer() {
+  drawer.classList.add('open');
+  drawerOverlay.classList.add('open');
+  drawer.setAttribute('aria-hidden', 'false');
+  burger.setAttribute('aria-expanded', 'true');
+  updateLock();
+}
+function closeDrawer() {
+  drawer.classList.remove('open');
+  drawerOverlay.classList.remove('open');
+  drawer.setAttribute('aria-hidden', 'true');
+  burger.setAttribute('aria-expanded', 'false');
+  updateLock();
+}
+burger.addEventListener('click', openDrawer);
+document.getElementById('closeDrawer').addEventListener('click', closeDrawer);
+drawerOverlay.addEventListener('click', closeDrawer);
+drawer.querySelectorAll('[data-close]').forEach(a => a.addEventListener('click', closeDrawer));
+window.addEventListener('resize', () => { if (window.innerWidth > 1120 && drawer.classList.contains('open')) closeDrawer(); });
+
+// ── COMMAND PALETTE (Ctrl/⌘ + K) ──
+const DL_URL = 'https://drive.google.com/file/d/1Abem_ZiYylN5OPbEQCgYX2eU0kG3WwNg/view?usp=sharing';
+const svgIc = d => '<svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="' + d + '"/></svg>';
+const IC = {
+  hash: svgIc('M7 20l4-16m2 16l4-16M6 9h14M4 15h14'),
+  page: svgIc('M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'),
+  dl:   svgIc('M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4'),
+  mail: svgIc('M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'),
+  chat: svgIc('M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4-.83L3 20l1.4-3.73A7.6 7.6 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z')
+};
+const CMD_ITEMS = [
+  { g: 'Sections', l: 'Features', h: '#features', i: 'hash', hint: 'Section', k: 'tools capabilities' },
+  { g: 'Sections', l: 'Editor', h: '#showcase', i: 'hash', hint: 'Section', k: 'code edit push built-in' },
+  { g: 'Sections', l: "What's new", h: '#preview', i: 'hash', hint: 'Section', k: 'markdown images branches latest release' },
+  { g: 'Sections', l: 'Workflow', h: '#workflow', i: 'hash', hint: 'Section', k: 'steps browse edit commit upload delete' },
+  { g: 'Sections', l: 'Compare', h: '#compare', i: 'hash', hint: 'Section', k: 'why traditional terminal browser' },
+  { g: 'Sections', l: 'Security', h: '#security', i: 'hash', hint: 'Section', k: 'token credentials privacy safe' },
+  { g: 'Sections', l: 'Feedback', h: '#testimonials', i: 'hash', hint: 'Section', k: 'testimonials reviews' },
+  { g: 'Sections', l: 'FAQ', h: '#faq', i: 'hash', hint: 'Section', k: 'questions help answers' },
+  { g: 'Sections', l: 'Documentation', h: '#docs', i: 'hash', hint: 'Section', k: 'docs setup install token guide' },
+  { g: 'Sections', l: 'Contact', h: '#contact-developer', i: 'hash', hint: 'Section', k: 'developer message support bug' },
+  { g: 'Pages', l: 'Privacy Policy', h: '#privacy', i: 'page', hint: 'Page', k: 'data legal' },
+  { g: 'Pages', l: 'Terms of Service', h: '#terms', i: 'page', hint: 'Page', k: 'legal license' },
+  { g: 'Actions', l: 'Download GitKit', url: DL_URL, i: 'dl', hint: 'Open link', k: 'install windows free get' },
+  { g: 'Actions', l: 'Email the developer', url: 'https://mail.google.com/mail/u/0/?to=shukdevdatta@gmail.com&fs=1&tf=cm', i: 'mail', hint: 'Open link', k: 'contact support gmail' },
+  { g: 'Actions', l: 'WhatsApp the developer', url: 'https://wa.me/+8801719296601', i: 'chat', hint: 'Open link', k: 'message chat contact' }
+];
+
+const cmdk = document.getElementById('cmdk');
+const cmdkInput = document.getElementById('cmdkInput');
+const cmdkList = document.getElementById('cmdkList');
+let vis = [], selIdx = 0, lastFocus = null;
+
+function escHtml(s) { return s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+
+function renderCmd() {
+  const toks = cmdkInput.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  vis = CMD_ITEMS.filter(it => {
+    const hay = (it.l + ' ' + it.k).toLowerCase();
+    return toks.every(t => hay.includes(t));
+  });
+  if (selIdx >= vis.length) selIdx = 0;
+  if (!vis.length) {
+    cmdkList.innerHTML = '<div class="cmdk-empty">No results for “' + escHtml(cmdkInput.value.trim()) + '”. Try “docs” or “branch”.</div>';
+    return;
+  }
+  let html = '', lastG = '';
+  vis.forEach((it, i) => {
+    if (it.g !== lastG) { html += '<div class="cmdk-group">' + it.g + '</div>'; lastG = it.g; }
+    html += '<div class="cmdk-item' + (i === selIdx ? ' sel' : '') + '" role="option" aria-selected="' + (i === selIdx) + '" data-i="' + i + '">' +
+      '<span class="ci">' + IC[it.i] + '</span>' + escHtml(it.l) + '<span class="hint">' + it.hint + '</span></div>';
+  });
+  cmdkList.innerHTML = html;
+}
+function setSel(i) {
+  selIdx = i;
+  cmdkList.querySelectorAll('.cmdk-item').forEach(el => {
+    const on = +el.dataset.i === i;
+    el.classList.toggle('sel', on);
+    el.setAttribute('aria-selected', on);
+    if (on) el.scrollIntoView({ block: 'nearest' });
+  });
+}
+function runCmd(i) {
+  const it = vis[i];
+  if (!it) return;
+  closeCmd();
+  if (it.h) {
+    const el = document.querySelector(it.h);
+    if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+  } else if (it.url) {
+    window.open(it.url, '_blank', 'noopener');
+  }
+}
+function openCmd() {
+  if (drawer.classList.contains('open')) closeDrawer();
+  lastFocus = document.activeElement;
+  cmdk.classList.add('open');
+  cmdk.setAttribute('aria-hidden', 'false');
+  cmdkInput.value = '';
+  selIdx = 0;
+  renderCmd();
+  updateLock();
+  setTimeout(() => cmdkInput.focus(), 30);
+}
+function closeCmd() {
+  cmdk.classList.remove('open');
+  cmdk.setAttribute('aria-hidden', 'true');
+  updateLock();
+  if (lastFocus && lastFocus.focus) lastFocus.focus();
+}
+document.getElementById('openCmdk').addEventListener('click', openCmd);
+document.getElementById('drSearch').addEventListener('click', openCmd);
+cmdkInput.addEventListener('input', () => { selIdx = 0; renderCmd(); });
+cmdk.addEventListener('mousedown', e => { if (e.target === cmdk) closeCmd(); });
+cmdkList.addEventListener('mousemove', e => {
+  const it = e.target.closest('.cmdk-item');
+  if (it && +it.dataset.i !== selIdx) setSel(+it.dataset.i);
+});
+cmdkList.addEventListener('click', e => {
+  const it = e.target.closest('.cmdk-item');
+  if (it) runCmd(+it.dataset.i);
+});
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+    e.preventDefault();
+    cmdk.classList.contains('open') ? closeCmd() : openCmd();
+    return;
+  }
+  if (cmdk.classList.contains('open')) {
+    if (e.key === 'Escape') { closeCmd(); }
+    else if (e.key === 'ArrowDown') { e.preventDefault(); if (vis.length) setSel((selIdx + 1) % vis.length); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); if (vis.length) setSel((selIdx - 1 + vis.length) % vis.length); }
+    else if (e.key === 'Enter') { e.preventDefault(); runCmd(selIdx); }
+  } else if (e.key === 'Escape' && drawer.classList.contains('open')) {
+    closeDrawer();
+  }
 });
 
 // ── SCROLL REVEAL ──
@@ -1734,9 +1996,6 @@ document.querySelectorAll('.etab').forEach(tab => {
     tab.classList.add('active');
   });
 });
-
-// ── MARQUEE DUPLICATE for seamless ──
-// already duplicated in HTML
 
 // ── RIPPLE ON BUTTONS ──
 document.querySelectorAll('.btn-hero, .btn, .cta-btn').forEach(btn => {
@@ -1832,18 +2091,6 @@ if (contactForm) {
       });
   });
 }
-
-// ── SMOOTH ACTIVE NAV ──
-const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
-  navLinks.forEach(a => {
-    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--brand)' : '';
-    a.style.background = a.getAttribute('href') === '#' + current ? 'var(--brand-pale)' : '';
-  });
-});
 </script>
 </body>
 </html>
