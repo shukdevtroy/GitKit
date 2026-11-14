@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GitKit — Manage GitHub Without the Browser</title>
-  <meta name="description" content="Browse repositories, edit files, commit changes, and push updates from one elegant desktop application built for developers." />
+  <meta name="description" content="Browse repositories, switch branches, edit files, preview Markdown and images, commit changes, and push updates from one elegant desktop application built for developers." />
   <meta property="og:title" content="GitKit — Manage GitHub Without the Browser" />
-  <meta property="og:description" content="Browse repositories, edit files, commit changes, and push updates from one elegant desktop application built for developers." />
+  <meta property="og:description" content="Browse repositories, switch branches, edit files, preview Markdown and images, commit changes, and push updates from one elegant desktop application built for developers." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -147,7 +147,7 @@
 
   /* ── MARQUEE ── */
   #marquee-wrap{background:var(--brand);padding:14px 0;overflow:hidden;position:relative}
-  .marquee-track{display:flex;gap:0;animation:marquee 28s linear infinite;white-space:nowrap;width:max-content}
+  .marquee-track{display:flex;gap:0;animation:marquee 46s linear infinite;white-space:nowrap;width:max-content}
   .marquee-track:hover{animation-play-state:paused}
   .marquee-item{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:rgba(255,255,255,.85);padding:0 32px}
   .marquee-item svg{width:14px;height:14px;color:rgba(255,255,255,.6);flex-shrink:0}
@@ -440,6 +440,55 @@
   @media(prefers-reduced-motion:reduce){
     *,*::before,*::after{animation:none!important;transition:none!important}
   }
+
+  /* ── v3 additions: NEW pill, What's New preview, workflow tabs ── */
+  .new-pill{position:absolute;top:18px;right:18px;font-size:10px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;color:#fff;background:linear-gradient(135deg,var(--brand),#A78BFA);padding:3px 9px;border-radius:100px;box-shadow:0 2px 8px rgba(108,99,255,.3)}
+  .wf-tabs{flex-wrap:wrap;max-width:100%}
+
+  #preview{background:#fff}
+  .pv-win{background:#fff;border:1px solid var(--border);border-radius:20px;box-shadow:var(--sh-lg);overflow:hidden}
+  .pv-bar{background:var(--surface-2);border-bottom:1px solid var(--border);padding:11px 16px;display:flex;align-items:center;gap:12px}
+  .pv-title{font-size:12px;font-weight:600;color:var(--text-2)}
+  .pv-body{display:grid;grid-template-columns:200px 1fr;min-height:380px}
+  .pv-side{border-right:1px solid var(--border);background:var(--surface);padding:12px 10px;display:flex;flex-direction:column;gap:3px}
+  .pv-branch{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:9px;padding:6px 8px;margin-bottom:8px}
+  .pv-bico{color:var(--text-3);font-size:13px}
+  .pv-bname{flex:1;font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;color:var(--text)}
+  .pv-ib{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--brand);background:var(--brand-pale);flex-shrink:0}
+  .pv-ib.red{color:#EF4444;background:#FEE2E2}
+  .pv-row{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:8px;font-size:12.5px;font-weight:500;color:var(--text);transition:background .15s}
+  .pv-row:hover{background:var(--surface-2)}
+  .pv-row.sel{background:var(--brand-pale);color:var(--brand);font-weight:600}
+  .pv-del{margin-left:auto;font-size:11px;opacity:0;padding:2px 5px;border-radius:5px;transition:opacity .15s}
+  .pv-row.sel .pv-del,.pv-row:hover .pv-del{opacity:.9}
+  .pv-del:hover{background:#FEE2E2}
+  .pv-main{display:flex;flex-direction:column;min-width:0}
+  .pv-head{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--border)}
+  .pv-back{font-size:11.5px;font-weight:700;color:var(--text);background:var(--surface);border:1px solid var(--border-hover);border-radius:6px;padding:3px 9px;white-space:nowrap}
+  .pv-fname{font-size:12.5px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pv-acts{margin-left:auto;display:flex;gap:6px}
+  .pv-act{font-size:10.5px;font-weight:600;color:var(--text-2);border:1px solid var(--border);border-radius:6px;padding:3px 8px;white-space:nowrap}
+  .pv-act.red{color:#EF4444;background:#FEE2E2;border-color:#FCA5A5}
+  .pv-md{padding:20px 22px;font-size:13px;line-height:1.65;color:var(--text-2)}
+  .pv-md h4{font-size:20px;font-weight:800;color:var(--text);letter-spacing:-.4px;padding-bottom:8px;margin-bottom:10px;border-bottom:1px solid var(--border)}
+  .pv-md p{margin-bottom:12px}
+  .pv-md strong{color:var(--text)}
+  .pv-md code{font-family:'JetBrains Mono',monospace;font-size:11.5px;background:var(--surface-2);border:1px solid var(--border);border-radius:4px;padding:1px 5px}
+  .pv-md table{border-collapse:collapse;margin-bottom:14px;font-size:12px}
+  .pv-md th,.pv-md td{border:1px solid var(--border-hover);padding:5px 12px;text-align:left}
+  .pv-md th{background:var(--surface);font-weight:700;color:var(--text)}
+  .pv-tasks{list-style:none;display:flex;flex-direction:column;gap:5px}
+  .pv-tasks li{display:flex;align-items:center;gap:8px}
+  .pv-tasks li::before{content:'';width:14px;height:14px;border:1.5px solid var(--border-hover);border-radius:4px;flex-shrink:0}
+  .pv-tasks li.done::before{background:var(--brand);border-color:var(--brand);box-shadow:inset 0 0 0 2px #fff}
+  .pv-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 16px;background:var(--surface);border-top:1px solid var(--border)}
+  .pv-pill{font-size:11px;font-weight:700;color:var(--brand);background:var(--brand-pale);padding:3px 10px;border-radius:100px}
+  .pv-hint{font-size:11px;color:var(--text-3);font-weight:500}
+  @media(max-width:600px){
+    .pv-body{grid-template-columns:1fr}
+    .pv-side{display:none}
+    .pv-acts{display:none}
+  }
   </style>
 </head>
 <body>
@@ -482,11 +531,11 @@
 
   <div class="hero-badge">
     <span class="hero-badge-dot"></span>
-    Now available for Windows · v1.0
+    Now available for Windows · New: branches, Markdown &amp; image preview
   </div>
 
   <h1>Manage GitHub<br /><span class="grad">Without the Browser</span></h1>
-  <p class="hero-sub">Browse repositories, edit files, commit changes, and push updates — all from one elegant desktop workspace.</p>
+  <p class="hero-sub">Browse repositories, switch branches, edit files, preview Markdown and images, commit changes, and push updates — all from one elegant desktop workspace.</p>
 
   <div class="hero-btns">
     <a href="https://drive.google.com/file/d/1WBapoORjXZ_Je0EO5GUYSH4AqRy8Zczs/view?usp=sharing" class="btn-hero btn-hero-primary">
@@ -634,7 +683,7 @@
     <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
     <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Edit Files In-App</div>
     <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Commit & Push</div>
+    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Commit &amp; Push</div>
     <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
     <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Secure Token Auth</div>
     <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
@@ -646,19 +695,31 @@
     <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
     <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>No Browser Needed</div>
     <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Create Files & Folders</div>
+    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Create Files &amp; Folders</div>
     <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Rename & Delete Files</div>
+    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Rename &amp; Delete Files</div>
     <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
     <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>View PDFs In-App</div>
     <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
     <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Jupyter Notebook Viewer</div>
+    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
+    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Branch Management</div>
+    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
+    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Upload Whole Folders</div>
+    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
+    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Markdown Preview &amp; Edit</div>
+    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
+    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Image Preview</div>
+    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
+    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Find &amp; Replace</div>
+    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
+    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Delete Files &amp; Folders</div>
     <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
     <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Browse Repositories</div>
     <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
     <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Edit Files In-App</div>
     <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Commit & Push</div>
+    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Commit &amp; Push</div>
     <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
     <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Secure Token Auth</div>
     <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
@@ -670,13 +731,25 @@
     <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
     <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>No Browser Needed</div>
     <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Create Files & Folders</div>
+    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Create Files &amp; Folders</div>
     <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
-    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Rename & Delete Files</div>
+    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Rename &amp; Delete Files</div>
     <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
     <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>View PDFs In-App</div>
     <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
     <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Jupyter Notebook Viewer</div>
+    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
+    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Branch Management</div>
+    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
+    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Upload Whole Folders</div>
+    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
+    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Markdown Preview &amp; Edit</div>
+    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
+    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Image Preview</div>
+    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
+    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Find &amp; Replace</div>
+    <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
+    <div class="marquee-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Delete Files &amp; Folders</div>
     <div class="marquee-item" style="color:rgba(255,255,255,.4)">·</div>
   </div>
 </div>
@@ -751,7 +824,7 @@
       <div class="feat-card reveal">
         <div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg></div>
         <h3>File Downloads</h3>
-        <p>Download individual files or entire directories to your local machine. One-click, no extra steps.</p>
+        <p>Save any file to your machine in one click — source code, images, PDFs or binaries. Files are saved exactly as they are in the repo.</p>
         <div class="feat-tag">💾 Local download</div>
       </div>
       <div class="feat-card reveal">
@@ -781,7 +854,7 @@
       <div class="feat-card reveal">
         <div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></div>
         <h3>Rename & Delete Files</h3>
-        <p>Rename or delete any file with a commit message. Toggle repository visibility between public and private too.</p>
+        <p>Rename or delete any file with your own commit message. Toggle repository visibility between public and private too.</p>
         <div class="feat-tag">🗑 Full file control</div>
       </div>
       <div class="feat-card reveal">
@@ -789,6 +862,48 @@
         <h3>PDF & Notebook Viewer</h3>
         <p>Preview PDF files inline and render Jupyter Notebooks with code cells and outputs — no extra tools needed.</p>
         <div class="feat-tag">📓 Rich previews</div>
+      </div>
+      <div class="feat-card reveal">
+        <span class="new-pill">New</span>
+        <div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 01-9 9"/></svg></div>
+        <h3>Branch Management</h3>
+        <p>Switch branches from a dropdown, create a new branch from the one you're on, and delete branches you're finished with — with a type-the-name confirmation.</p>
+        <div class="feat-tag">⎇ Switch · Create · Delete</div>
+      </div>
+      <div class="feat-card reveal">
+        <span class="new-pill">New</span>
+        <div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15v4a2 2 0 002 2h14a2 2 0 002-2v-4M17 8l-5-5-5 5M12 3v12"/></svg></div>
+        <h3>Whole-Folder Upload</h3>
+        <p>Pick a local folder and GitKit uploads it with its structure intact as a single commit — skipping .git, node_modules and other clutter.</p>
+        <div class="feat-tag">📦 One commit</div>
+      </div>
+      <div class="feat-card reveal">
+        <span class="new-pill">New</span>
+        <div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+        <h3>Markdown Preview &amp; Editing</h3>
+        <p>README.md and other Markdown files render as formatted pages — tables, task lists, code blocks, even repo images. Hit Edit for a live side-by-side preview.</p>
+        <div class="feat-tag">📝 Live preview</div>
+      </div>
+      <div class="feat-card reveal">
+        <span class="new-pill">New</span>
+        <div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
+        <h3>Image Preview</h3>
+        <p>PNG, JPG, GIF, WebP, SVG and more open as real images — with a fit / actual-size toggle — instead of a wall of garbled text.</p>
+        <div class="feat-tag">🖼 See it, don't decode it</div>
+      </div>
+      <div class="feat-card reveal">
+        <span class="new-pill">New</span>
+        <div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></div>
+        <h3>One-Click Delete</h3>
+        <p>Every file and folder row has its own trash icon. Deleting a folder removes everything inside it in a single commit — after you confirm.</p>
+        <div class="feat-tag">🗑 Files &amp; folders</div>
+      </div>
+      <div class="feat-card reveal">
+        <span class="new-pill">New</span>
+        <div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M10 8v4m-2-2h4"/></svg></div>
+        <h3>Find &amp; Replace</h3>
+        <p>Press Ctrl + F in the editor to find text, step through matches, and replace one or all — right inside the file you're editing.</p>
+        <div class="feat-tag">🔎 Ctrl + F</div>
       </div>
     </div>
   </div>
@@ -859,6 +974,76 @@
   </div>
 </section>
 
+<!-- ═══ WHAT'S NEW / PREVIEW ═══ -->
+<section id="preview">
+  <div class="container">
+    <div class="showcase-wrap">
+      <div class="sc-content reveal">
+        <div class="stag">What's New</div>
+        <h2>Markdown, images &amp;<br />branches — built in.</h2>
+        <p class="section-lead" style="font-size:16px">GitKit now shows your files the way they're meant to be seen, and gives you full control of your repo without leaving the window.</p>
+        <div class="sc-points">
+          <div class="sc-pt">
+            <div class="sc-pt-dot"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+            <div class="sc-pt-text"><h4>Markdown that actually renders</h4><p>Headings, tables, task lists and code blocks — plus images stored in your repo. Press Edit and turn on Live preview to see changes as you type.</p></div>
+          </div>
+          <div class="sc-pt">
+            <div class="sc-pt-dot"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
+            <div class="sc-pt-text"><h4>Real image previews</h4><p>PNG, JPG, GIF, WebP, SVG, ICO and BMP display as pictures. Other binary files get a clear “no preview” notice and a Download button.</p></div>
+          </div>
+          <div class="sc-pt">
+            <div class="sc-pt-dot"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 01-9 9"/></svg></div>
+            <div class="sc-pt-text"><h4>Branches at your fingertips</h4><p>Switch, create and delete branches from the bar above your files. The default branch is protected, and deleting asks you to type the name.</p></div>
+          </div>
+          <div class="sc-pt">
+            <div class="sc-pt-dot"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></div>
+            <div class="sc-pt-text"><h4>Delete from the list, go Back anywhere</h4><p>A trash icon on every file and folder, and a ← Back button in the viewer to close a file and return to a clean slate.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pv-win reveal">
+        <div class="pv-bar">
+          <div class="editor-dots"><div class="ed r"></div><div class="ed y"></div><div class="ed g"></div></div>
+          <span class="pv-title">GitKit — Portfolio</span>
+        </div>
+        <div class="pv-body">
+          <div class="pv-side">
+            <div class="pv-branch"><span class="pv-bico">⎇</span><span class="pv-bname">dev</span><span class="pv-ib">＋</span><span class="pv-ib red">🗑</span></div>
+            <div class="pv-row"><span>📂</span>docs<span class="pv-del">🗑</span></div>
+            <div class="pv-row"><span>🖼</span>logo.png<span class="pv-del">🗑</span></div>
+            <div class="pv-row sel"><span>📝</span>README.md<span class="pv-del">🗑</span></div>
+            <div class="pv-row"><span>🐍</span>main.py<span class="pv-del">🗑</span></div>
+            <div class="pv-row"><span>📄</span>notes.txt<span class="pv-del">🗑</span></div>
+          </div>
+          <div class="pv-main">
+            <div class="pv-head">
+              <span class="pv-back">← Back</span>
+              <span class="pv-fname">README.md</span>
+              <span class="pv-acts"><span class="pv-act">⬇ Download</span><span class="pv-act">✎ Edit</span><span class="pv-act red">🗑 Delete</span></span>
+            </div>
+            <div class="pv-md">
+              <h4>Portfolio</h4>
+              <p>A <strong>fast</strong>, minimal personal site built with <code>Next.js</code>.</p>
+              <table>
+                <tr><th>Script</th><th>What it does</th></tr>
+                <tr><td><code>dev</code></td><td>Start the dev server</td></tr>
+                <tr><td><code>build</code></td><td>Production build</td></tr>
+              </table>
+              <ul class="pv-tasks">
+                <li class="done">Responsive layout</li>
+                <li class="done">Dark mode</li>
+                <li>Blog section</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="pv-foot"><span class="pv-pill">Preview</span><span class="pv-hint">Edit → Live preview · side by side</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ INTERACTIVE WORKFLOW ═══ -->
 <section id="workflow">
   <div class="container">
@@ -872,6 +1057,10 @@
       <button class="wf-tab" onclick="switchWorkflow('edit')">Edit a File</button>
       <button class="wf-tab" onclick="switchWorkflow('push')">Commit & Push</button>
       <button class="wf-tab" onclick="switchWorkflow('explore')">Explore Public</button>
+      <button class="wf-tab" onclick="switchWorkflow('branches')">Branches</button>
+      <button class="wf-tab" onclick="switchWorkflow('upload')">Upload</button>
+      <button class="wf-tab" onclick="switchWorkflow('previewfiles')">Preview Files</button>
+      <button class="wf-tab" onclick="switchWorkflow('delete')">Delete Safely</button>
     </div>
 
     <!-- Pane: Browse -->
@@ -970,6 +1159,106 @@
           <div class="wf-preview-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg></div>
           <h3>Public Explorer</h3>
           <p>Explore any GitHub user's public repos without leaving GitKit. Great for learning and reviewing code.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pane: branches -->
+    <div class="wf-pane" id="wf-branches">
+      <div class="wf-steps">
+        <div class="wf-step active-step" onclick="activateStep(this)">
+          <div class="wf-step-num">1</div>
+          <div class="wf-step-text"><h4>Pick a branch</h4><p>Use the branch dropdown above the file list. The default branch is clearly marked.</p></div>
+        </div>
+        <div class="wf-step" onclick="activateStep(this)">
+          <div class="wf-step-num">2</div>
+          <div class="wf-step-text"><h4>Create a new one</h4><p>Click ＋ to branch off the one you're viewing, then give the new branch a name.</p></div>
+        </div>
+        <div class="wf-step" onclick="activateStep(this)">
+          <div class="wf-step-num">3</div>
+          <div class="wf-step-text"><h4>Clean up</h4><p>On any non-default branch, click 🗑 and type the branch name to confirm. The default branch can't be deleted.</p></div>
+        </div>
+      </div>
+      <div class="wf-preview">
+        <div class="wf-preview-inner">
+          <div class="wf-preview-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 01-9 9"/></svg></div>
+          <h3>Branch Manager</h3>
+          <p>Switch, create and delete branches without leaving the file list — every edit and commit goes to the branch you're on.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pane: upload -->
+    <div class="wf-pane" id="wf-upload">
+      <div class="wf-steps">
+        <div class="wf-step active-step" onclick="activateStep(this)">
+          <div class="wf-step-num">1</div>
+          <div class="wf-step-text"><h4>Click ⬆ in the file panel</h4><p>Open the upload dialog from the folder you want to upload into.</p></div>
+        </div>
+        <div class="wf-step" onclick="activateStep(this)">
+          <div class="wf-step-num">2</div>
+          <div class="wf-step-text"><h4>Choose files or a folder</h4><p>Pick individual files, or a whole folder — its structure is preserved and clutter like .git and node_modules is skipped.</p></div>
+        </div>
+        <div class="wf-step" onclick="activateStep(this)">
+          <div class="wf-step-num">3</div>
+          <div class="wf-step-text"><h4>Commit</h4><p>Add a commit message. A folder lands on GitHub as one single commit.</p></div>
+        </div>
+      </div>
+      <div class="wf-preview">
+        <div class="wf-preview-inner">
+          <div class="wf-preview-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15v4a2 2 0 002 2h14a2 2 0 002-2v-4M17 8l-5-5-5 5M12 3v12"/></svg></div>
+          <h3>Upload Center</h3>
+          <p>Drop files or entire project folders into any repo and branch, straight from your desktop.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pane: previewfiles -->
+    <div class="wf-pane" id="wf-previewfiles">
+      <div class="wf-steps">
+        <div class="wf-step active-step" onclick="activateStep(this)">
+          <div class="wf-step-num">1</div>
+          <div class="wf-step-text"><h4>Click a file</h4><p>Images show as real pictures, Markdown as a formatted page, PDFs and notebooks inline.</p></div>
+        </div>
+        <div class="wf-step" onclick="activateStep(this)">
+          <div class="wf-step-num">2</div>
+          <div class="wf-step-text"><h4>Edit Markdown with Live preview</h4><p>Press Edit on any .md file, then switch on Live preview to see the rendered page beside your text.</p></div>
+        </div>
+        <div class="wf-step" onclick="activateStep(this)">
+          <div class="wf-step-num">3</div>
+          <div class="wf-step-text"><h4>Go Back</h4><p>Hit ← Back to close the file. If you have unsaved edits, GitKit asks before discarding them.</p></div>
+        </div>
+      </div>
+      <div class="wf-preview">
+        <div class="wf-preview-inner">
+          <div class="wf-preview-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg></div>
+          <h3>Rich File Preview</h3>
+          <p>The right viewer for every file type — so you can read it first and decide what to do next.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pane: delete -->
+    <div class="wf-pane" id="wf-delete">
+      <div class="wf-steps">
+        <div class="wf-step active-step" onclick="activateStep(this)">
+          <div class="wf-step-num">1</div>
+          <div class="wf-step-text"><h4>Hover a row</h4><p>Every file and folder in your own repos shows a trash icon.</p></div>
+        </div>
+        <div class="wf-step" onclick="activateStep(this)">
+          <div class="wf-step-num">2</div>
+          <div class="wf-step-text"><h4>Confirm</h4><p>A dialog names what's being deleted. For folders it also tells you how many files are inside.</p></div>
+        </div>
+        <div class="wf-step" onclick="activateStep(this)">
+          <div class="wf-step-num">3</div>
+          <div class="wf-step-text"><h4>One commit</h4><p>Add a commit message. A folder and everything in it is removed in a single commit, easy to find in your history.</p></div>
+        </div>
+      </div>
+      <div class="wf-preview">
+        <div class="wf-preview-inner">
+          <div class="wf-preview-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></div>
+          <h3>Safe Cleanup</h3>
+          <p>Remove files and folders in a couple of clicks — with a confirmation every time, so nothing disappears by accident.</p>
         </div>
       </div>
     </div>
@@ -1077,9 +1366,13 @@
       <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">What is GitKit?<svg class="faq-chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div><div class="faq-a">GitKit is a premium desktop application that lets you manage your GitHub repositories without opening a browser. Browse repos, explore files, edit code, commit changes, and push updates — all from one focused window.</div></div>
       <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Is my GitHub token secure?<svg class="faq-chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div><div class="faq-a">Yes. Your Personal Access Token is stored locally on your machine and is never transmitted to any GitKit server. GitKit communicates directly with GitHub's API — there is no cloud intermediary.</div></div>
       <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Does GitKit support private repositories?<svg class="faq-chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div><div class="faq-a">Yes. If your Personal Access Token has the appropriate repo scope, GitKit can list, browse, and edit both public and private repositories you own or have been granted access to.</div></div>
-      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Can I edit files directly?<svg class="faq-chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div><div class="faq-a">Yes. GitKit includes a built-in file editor. Open any file, make your changes, write a commit message, and push — all within the same window without switching apps.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Can I edit files directly?<svg class="faq-chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div><div class="faq-a">Yes. GitKit includes a built-in file editor with find &amp; replace (Ctrl + F). Open any file, make your changes, write a commit message, and push — all within the same window. Markdown files open as a formatted preview, and Edit offers a live side-by-side preview.</div></div>
       <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Is GitKit free?<svg class="faq-chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div><div class="faq-a">GitKit is available as a free download. Future plans may include additional features in a paid tier, but the core functionality for individual developers will remain free.</div></div>
       <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Which operating systems are supported?<svg class="faq-chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div><div class="faq-a">GitKit currently supports Windows. macOS and Linux builds are in active development — check back soon for updates.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Can I work with branches?<svg class="faq-chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div><div class="faq-a">Yes. Use the branch dropdown to switch branches, ＋ to create a new branch from the one you're viewing, and 🗑 to delete a branch you no longer need. The default branch can't be deleted, and GitKit asks you to type the branch name before deleting. GitHub may still refuse to delete protected branches.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">What file types can GitKit preview?<svg class="faq-chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div><div class="faq-a">Images (PNG, JPG, GIF, WebP, SVG, ICO, BMP), Markdown, PDFs and Jupyter notebooks open as rich previews. Everything else opens in the text editor, and binary files such as ZIPs show a “no preview” notice with a Download button.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Can I upload an entire folder?<svg class="faq-chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div><div class="faq-a">Yes. Choose a folder in the upload dialog and GitKit uploads it with its structure intact as a single commit, skipping things like .git and node_modules.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Can I undo a delete?<svg class="faq-chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div><div class="faq-a">Deleting a file or folder is an ordinary Git commit, so the content remains in your repository's history and can be restored from GitHub. Deleting a branch or a whole repository is permanent from GitKit's side — which is why both ask you to type the name to confirm.</div></div>
     </div>
   </div>
 </section>
@@ -1111,7 +1404,7 @@
       <div class="doc-card reveal">
         <div class="doc-num">4</div>
         <h3>Start managing</h3>
-        <p>Browse your repos, explore any public profile, edit files, commit, push, upload, and create or delete repositories — all in one window.</p>
+        <p>Browse your repos, explore any public profile, switch branches, edit files, preview Markdown and images, commit, push, upload files or whole folders, and delete files, folders, branches or repositories — all in one window.</p>
       </div>
     </div>
     <div class="doc-chip-row reveal">
@@ -1125,6 +1418,12 @@
       <span class="doc-chip"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Rename &amp; delete files</span>
       <span class="doc-chip"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Preview PDFs &amp; Jupyter notebooks</span>
       <span class="doc-chip"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Toggle repo public/private visibility</span>
+      <span class="doc-chip"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Switch, create &amp; delete branches</span>
+      <span class="doc-chip"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Upload whole folders in one commit</span>
+      <span class="doc-chip"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Preview images &amp; Markdown</span>
+      <span class="doc-chip"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Edit Markdown with live preview</span>
+      <span class="doc-chip"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Delete files &amp; folders with one click</span>
+      <span class="doc-chip"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Find &amp; replace in the editor</span>
     </div>
     <p class="doc-more reveal">Have a question that's not covered here? Check the <a href="#faq">FAQ</a> above or see how each workflow works in the <a href="#workflow">Workflow</a> section above.</p>
   </div>
@@ -1219,7 +1518,7 @@
       <h2>Your data stays on your machine.</h2>
     </div>
     <div class="legal-wrap reveal">
-      <span class="legal-updated">Last updated: June 2026</span>
+      <span class="legal-updated">Last updated: November 2026</span>
       <div class="legal-note">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         <span>This policy describes how GitKit, a desktop application, handles data. It's written to be clear and accurate, not as a substitute for legal advice — if you need a policy tailored to specific regulations (GDPR, CCPA, etc.), have it reviewed by a professional.</span>
@@ -1239,6 +1538,7 @@
 
       <h3>Network requests</h3>
       <p>The only network requests GitKit makes are <strong>directly to GitHub's API</strong> (api.github.com), using your token, to read and update repositories on your behalf. There's no GitKit backend in between, so there's no intermediary server that could see your data in transit.</p>
+      <p>Two small things to know: when you preview a Markdown file, any images it references from external web addresses (such as README badges) are loaded by the app's built-in viewer directly from the server hosting them, and links you click inside a preview open in your default browser. Your token is never sent to either.</p>
 
       <h3>Third-party services</h3>
       <p>Because GitKit communicates directly with GitHub, any data exchanged with GitHub is also subject to GitHub's own Privacy Statement. We encourage you to review it for details on how GitHub itself handles your account data.</p>
@@ -1263,7 +1563,7 @@
       <h2>The fine print, kept short.</h2>
     </div>
     <div class="legal-wrap reveal">
-      <span class="legal-updated">Last updated: June 2026</span>
+      <span class="legal-updated">Last updated: November 2026</span>
 
       <h3>Acceptance of terms</h3>
       <p>By downloading or using GitKit, you agree to these terms. If you don't agree, please don't use the application.</p>
@@ -1284,7 +1584,7 @@
       <p>GitKit is provided <strong>"as is"</strong> and <strong>"as available,"</strong> without warranties of any kind, express or implied, including fitness for a particular purpose or uninterrupted, error-free operation.</p>
 
       <h3>Limitation of liability</h3>
-      <p>To the maximum extent permitted by law, GitKit and its developers aren't liable for any indirect, incidental, or consequential damages — including lost data, lost commits, or repository changes — arising from your use of the application.</p>
+      <p>To the maximum extent permitted by law, GitKit and its developers aren't liable for any indirect, incidental, or consequential damages — including lost data, lost commits, deleted files, folders or branches, or repository changes — arising from your use of the application.</p>
 
       <h3>Termination</h3>
       <p>This license ends automatically if you violate these terms. You may stop using GitKit at any time simply by uninstalling it.</p>
