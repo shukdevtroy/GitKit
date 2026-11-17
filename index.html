@@ -364,7 +364,7 @@
   .faq-chev{width:20px;height:20px;color:var(--text-3);transition:transform .32s,color .2s;flex-shrink:0}
   .faq-item.open .faq-chev{transform:rotate(180deg);color:var(--brand)}
   .faq-a{max-height:0;overflow:hidden;transition:max-height .38s ease,padding .3s;padding:0 24px;font-size:14px;color:var(--text-2);line-height:1.72;background:var(--brand-pale)}
-  .faq-item.open .faq-a{max-height:220px;padding:4px 24px 20px}
+  .faq-item.open .faq-a{max-height:340px;padding:4px 24px 20px}
 
   /* ── CTA ── */
   #cta{background:linear-gradient(135deg,#5A52E8 0%,var(--brand) 40%,#8B5CF6 100%);padding:100px 40px;text-align:center;position:relative;overflow:hidden}
@@ -668,7 +668,7 @@
 
   <div class="hero-badge">
     <span class="hero-badge-dot"></span>
-    Now available for Windows · New: branches, Markdown &amp; image preview
+    Now available for Windows · New: collaborators, invitations &amp; guided token setup
   </div>
 
   <h1>Manage GitHub<br /><span class="grad">Without the Browser</span></h1>
@@ -968,6 +968,34 @@
         <p>Press Ctrl + F in the editor to find text, step through matches, and replace one or all — right inside the file you're editing.</p>
         <div class="feat-tag">🔎 Ctrl + F</div>
       </div>
+      <div class="feat-card reveal">
+        <span class="new-pill">New</span>
+        <div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+        <h3>Collaborator Management</h3>
+        <p>Open <strong>Contributors</strong> on any repo you own, invite people by GitHub username, remove them later, or cancel an invitation that hasn't been accepted yet.</p>
+        <div class="feat-tag">👥 Invite · Remove · Cancel</div>
+      </div>
+      <div class="feat-card reveal">
+        <span class="new-pill">New</span>
+        <div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg></div>
+        <h3>Shared With Me &amp; Invitations</h3>
+        <p>Accept or decline repo invitations right inside GitKit. Repos others shared with you show up in the sidebar with a <strong>READ</strong> or <strong>WRITE</strong> badge — read-only repos hide the editing buttons.</p>
+        <div class="feat-tag">🤝 Accept in-app</div>
+      </div>
+      <div class="feat-card reveal">
+        <span class="new-pill">New</span>
+        <div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg></div>
+        <h3>Guided Token Setup</h3>
+        <p>An interactive walkthrough shows exactly where to click on GitHub, and a built-in guide tells you <strong>which token to use</strong> — fine-grained for your own repos, classic for shared ones.</p>
+        <div class="feat-tag">🧭 Step-by-step</div>
+      </div>
+      <div class="feat-card reveal">
+        <span class="new-pill">New</span>
+        <div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></div>
+        <h3>Password Lock &amp; Account Switching</h3>
+        <p>Unlock GitKit with your local password (with a handy show/hide eye), or sign out and switch to another GitHub account in a couple of clicks.</p>
+        <div class="feat-tag">🔒 Unlock · Switch</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1124,6 +1152,8 @@
       <button class="wf-tab" onclick="switchWorkflow('upload')">Upload</button>
       <button class="wf-tab" onclick="switchWorkflow('previewfiles')">Preview Files</button>
       <button class="wf-tab" onclick="switchWorkflow('delete')">Delete Safely</button>
+      <button class="wf-tab" onclick="switchWorkflow('collab')">Collaborate</button>
+      <button class="wf-tab" onclick="switchWorkflow('token')">Token Setup</button>
     </div>
 
     <!-- Pane: Browse -->
@@ -1325,6 +1355,56 @@
         </div>
       </div>
     </div>
+
+    <!-- Pane: collab -->
+    <div class="wf-pane" id="wf-collab">
+      <div class="wf-steps">
+        <div class="wf-step active-step" onclick="activateStep(this)">
+          <div class="wf-step-num">1</div>
+          <div class="wf-step-text"><h4>Open Contributors</h4><p>On a repo you own, click the 👥 button above the file list.</p></div>
+        </div>
+        <div class="wf-step" onclick="activateStep(this)">
+          <div class="wf-step-num">2</div>
+          <div class="wf-step-text"><h4>Invite by username</h4><p>Type a GitHub username and click Add. They get an invitation and must accept it. On organization repos you can also pick Read, Triage, Write, Maintain or Admin.</p></div>
+        </div>
+        <div class="wf-step" onclick="activateStep(this)">
+          <div class="wf-step-num">3</div>
+          <div class="wf-step-text"><h4>Remove or cancel</h4><p>Click ✕ next to a collaborator to remove them, or next to a pending invitation to cancel it.</p></div>
+        </div>
+      </div>
+      <div class="wf-preview">
+        <div class="wf-preview-inner">
+          <div class="wf-preview-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+          <h3>Team Access</h3>
+          <p>Add and remove collaborators without opening GitHub's settings pages.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pane: token -->
+    <div class="wf-pane" id="wf-token">
+      <div class="wf-steps">
+        <div class="wf-step active-step" onclick="activateStep(this)">
+          <div class="wf-step-num">1</div>
+          <div class="wf-step-text"><h4>Open the token guide</h4><p>On the sign-in screen, click “How do I get a token?” to see which type fits you.</p></div>
+        </div>
+        <div class="wf-step" onclick="activateStep(this)">
+          <div class="wf-step-num">2</div>
+          <div class="wf-step-text"><h4>Pick fine-grained or classic</h4><p>Fine-grained is safer and covers your own repos. Classic with the repo scope also unlocks shared repos and invitations.</p></div>
+        </div>
+        <div class="wf-step" onclick="activateStep(this)">
+          <div class="wf-step-num">3</div>
+          <div class="wf-step-text"><h4>Follow the walkthrough</h4><p>The interactive walkthrough shows each click on GitHub, then you paste the token into GitKit.</p></div>
+        </div>
+      </div>
+      <div class="wf-preview">
+        <div class="wf-preview-inner">
+          <div class="wf-preview-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg></div>
+          <h3>Right Token, First Try</h3>
+          <p>No guessing which permissions GitHub wants — GitKit tells you.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1380,7 +1460,7 @@
       <div class="sec-card reveal">
         <div class="sec-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div>
         <h3>Minimal token scopes</h3>
-        <p>GitKit requests only the GitHub API scopes it actually uses — repo access and user info. Nothing broader than what's needed.</p>
+        <p>GitKit only uses the GitHub API access it needs. With a fine-grained token you can limit it to specific repositories and set an expiry date — so a leaked token does far less damage.</p>
       </div>
       <div class="sec-card reveal">
         <div class="sec-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg></div>
@@ -1423,6 +1503,10 @@
       <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">What file types can GitKit preview?<svg class="faq-chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div><div class="faq-a">Images (PNG, JPG, GIF, WebP, SVG, ICO, BMP), Markdown, PDFs and Jupyter notebooks open as rich previews. Everything else opens in the text editor, and binary files such as ZIPs show a “no preview” notice with a Download button.</div></div>
       <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Can I upload an entire folder?<svg class="faq-chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div><div class="faq-a">Yes. Choose a folder in the upload dialog and GitKit uploads it with its structure intact as a single commit, skipping things like .git and node_modules.</div></div>
       <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Can I undo a delete?<svg class="faq-chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div><div class="faq-a">Deleting a file or folder is an ordinary Git commit, so the content remains in your repository's history and can be restored from GitHub. Deleting a branch or a whole repository is permanent from GitKit's side — which is why both ask you to type the name to confirm.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Can I add or remove collaborators?<svg class="faq-chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div><div class="faq-a">Yes. On a repo you own, click the 👥 Contributors button, enter a GitHub username and click Add — they receive an invitation. You can remove a collaborator, or cancel a pending invitation, with the ✕ button. On personal repos GitHub gives every collaborator write access; the Read / Triage / Write / Maintain / Admin choices apply to organization repos.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">How do I accept a repo someone shared with me?<svg class="faq-chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div><div class="faq-a">Pending invitations appear in the sidebar under Invitations, with Accept and Decline buttons. Accepted repos are listed under Shared with me with a READ or WRITE badge. This needs a classic token with the repo scope — GitKit's guide walks you through creating one.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Fine-grained or classic token — which should I use?<svg class="faq-chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div><div class="faq-a">Use a fine-grained token if you only manage your own repos: you choose the repos and permissions, and it expires. Use a classic token with the repo scope if you also want repos shared with you and invitations. Fine-grained tokens need Administration and Contents: Read and write to manage collaborators and files.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Can I switch to a different GitHub account?<svg class="faq-chev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></div><div class="faq-a">Yes. Open the user menu in the top bar to sign out or switch accounts. Your local password protects the saved session on this device.</div></div>
     </div>
   </div>
 </section>
@@ -1444,7 +1528,7 @@
       <div class="doc-card reveal">
         <div class="doc-num">2</div>
         <h3>Generate a token</h3>
-        <p>On github.com, create a Fine-Grained Personal Access Token with repo and user scopes. GitKit's sign-in screen walks you through every step.</p>
+        <p>On github.com, create a Fine-Grained token for your own repos, or a Classic token with the repo scope if you also want shared repos and invitations. GitKit's sign-in screen explains which to pick and walks you through every step.</p>
       </div>
       <div class="doc-card reveal">
         <div class="doc-num">3</div>
@@ -1474,6 +1558,10 @@
       <span class="doc-chip"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Edit Markdown with live preview</span>
       <span class="doc-chip"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Delete files &amp; folders with one click</span>
       <span class="doc-chip"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Find &amp; replace in the editor</span>
+      <span class="doc-chip"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Invite &amp; remove collaborators</span>
+      <span class="doc-chip"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Accept or decline invitations</span>
+      <span class="doc-chip"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Open repos shared with you</span>
+      <span class="doc-chip"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Switch GitHub accounts</span>
     </div>
     <p class="doc-more reveal">Have a question that's not covered here? Check the <a href="#faq">FAQ</a> above or see how each workflow works in the <a href="#workflow">Workflow</a> section above.</p>
   </div>
@@ -1703,7 +1791,7 @@ document.addEventListener('mousemove', e => {
     'Browse Repositories','Edit Files In-App','Commit & Push','Secure Token Auth','Explore Public Repos',
     'Download Files','Local Session Storage','No Browser Needed','Create Files & Folders','Rename & Delete Files',
     'View PDFs In-App','Jupyter Notebook Viewer','Branch Management','Upload Whole Folders',
-    'Markdown Preview & Edit','Image Preview','Find & Replace','Delete Files & Folders'
+    'Markdown Preview & Edit','Image Preview','Find & Replace','Delete Files & Folders','Manage Collaborators','Accept Invitations','Shared Repos','Guided Token Setup','Switch Accounts'
   ];
   const check = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>';
   const esc = s => s.replace(/&/g, '&amp;');
